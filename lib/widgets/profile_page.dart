@@ -8,10 +8,10 @@ class Profile extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.blue.shade100,
+        backgroundColor: Colors.orange,
         title: const Text("Profile"),
       ),
-      backgroundColor: Colors.blue.shade100,
+      backgroundColor: Colors.orange,
       body: const Column(
         children: [
           CircleAvatar(
