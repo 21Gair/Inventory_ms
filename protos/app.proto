@@ -1,0 +1,80 @@
+syntax = "proto3";
+
+service productService {
+  rpc login (LoginRequest) returns (LoginResponse);
+  rpc GetCategories (Empty) returns (GetCategoriesResponse);
+  rpc addProduct (AddProductRequest) returns (AddProductResponse); 
+  rpc updateProduct (UpdateProductRequest) returns (UpdateProductResponse);
+  rpc GetProductsByCategory (GetProductsByCategoryRequest) returns (GetProductsByCategoryResponse);
+}
+
+//login
+message LoginRequest {
+  string user = 1;
+  string password = 2;
+}
+
+message LoginResponse {
+  bool success = 1; 
+  string message = 2; 
+  string token = 3;
+}
+
+//Dashbord
+message Empty {}
+
+message GetCategoriesResponse {
+  repeated string categories = 1;
+}
+
+// new product
+message AddProductRequest {
+  string name = 1; 
+  string category = 2; 
+  double price = 3; 
+  int32 quantity = 4; 
+  string productId = 5; 
+  bytes image = 6;
+}
+
+message AddProductResponse {
+ string message = 1;
+}
+
+//update
+enum OperationType {
+      UPDATE = 0;
+      DELETE = 1;
+    }
+
+message UpdateProductRequest{
+  string name = 1;
+  double price = 2;
+  int32 quantity = 3;
+  OperationType operation = 4;
+}
+
+message UpdateProductResponse{
+  string message = 1;
+}
+
+//for Dashbord
+message GetProductsByCategoryRequest {
+  string category = 1;
+  int32 limit = 2; // Number of products to fetch
+}
+
+message Product {
+  string name = 1;
+  string category = 2;
+  double price = 3;
+  int32 quantity = 4;
+  string productId = 5;
+  bytes image = 6;
+  string imageUrl = 7; // Add image URL to the product message
+}
+
+message GetProductsByCategoryResponse {
+  repeated Product products = 1;
+}
+
